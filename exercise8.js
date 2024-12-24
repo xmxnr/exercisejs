@@ -33,17 +33,17 @@ function totalBirdCount(birdsPerDay, week) {
 // You realized that all the time you were trying to keep track of the birds, there was one hiding in a far corner of the garden. You figured out that this bird always spent every second day in your garden. You do not know exactly where it was in between those days but definitely not in your garden. Your bird watcher intuition also tells you that the bird was in your garden on the first day that you tracked in your list.
 
 // Given this new information, write a function fixBirdCountLog that takes an array of birds counted per day as an argument. It should correct the counting mistake and return the modified array.
-birdsPerDay = [2, 5, 0, 7, 4, 1];
+birdsPerDay = [2, 5, 0, 7, 4, 1, 5];
 
-function fixBirdCounting(array) {
-	for (let i = 0; i <= array.length; i + 2) {
-		const newArray = [];
-		const element = array[i] + 1;
-
-		return newArray.push(element);
+function fixBirdCounting(birdsPerDay) {
+	for (let i = 0; i < birdsPerDay.length; i++) {
+		if (!(i % 2)) {
+			birdsPerDay[i] = birdsPerDay[i] + 1;
+		} else {
+			birdsPerDay[i];
+		}
 	}
-
-	return element;
+	return birdsPerDay;
 }
 
 console.log(fixBirdCounting(birdsPerDay));
