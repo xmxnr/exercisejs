@@ -33,26 +33,89 @@ function timeToMixJuice(name) {
 // Li Mei would like to know in advance how many limes she needs to cut. The limesToCut function should return the number of limes to cut.
 
 function limesToCut(wedgesNeeded, limes) {
-	const emptyArray = [];
+	let emptyArray = [];
 	let wedges = 0;
 
-	while (wedges <= wedgesNeeded) {
-		for (let i = 0; i <= limes.length; i++) {
-			switch (limes[i]) {
-				case 'small':
-					wedges += 6;
+	if (wedgesNeeded === 0) {
+		emptyArray = [];
+		return emptyArray.length;
+	} else {
+		while (wedges < wedgesNeeded) {
+			for (let i = 0; i <= limes.length; i++) {
+				switch (limes[i]) {
+					case 'large':
+						emptyArray.push(1);
+						wedges += 10;
+						break;
+					case 'medium':
+						emptyArray.push(1);
+						wedges += 8;
+						break;
+					case 'small':
+						emptyArray.push(1);
+						wedges += 6;
+						break;
+				}
+				if (wedges > wedgesNeeded) {
 					break;
-				case 'medium':
-					wedges += 8;
+				}
+			}
+			return emptyArray.length;
+		}
+	}
+}
+
+// Li Mei always works until 3pm. Then her employee Dmitry takes over. There are often drinks that have been ordered but are not prepared yet when Li Mei's shift ends. Dmitry will then prepare the remaining juices.
+
+// To make the hand-over easier, implement a function remainingOrders which takes the number of minutes left in Li Mei's shift and an array of juices that have been ordered but not prepared yet. The function should return the orders that Li Mei cannot start preparing before the end of her workday.
+
+// The time left in the shift will always be greater than 0. The array of juices to prepare will never be empty. Furthermore, the orders are prepared in the order in which they appear in the array. If Li Mei starts to mix a certain juice, she will always finish it even if she has to work a bit longer. If there are no remaining orders left that Dmitry needs to take care of, an empty array should be returned.
+
+function remainigOrders(timeLeft, orders) {
+	let emptyArray = [];
+	let remainingMinutes = 0;
+
+	while (remainingMinutes < timeLeft) {
+		for (let i = 0; i < orders.length; i++) {
+			switch (orders[i]) {
+				case 'Pure Strawberry Joy':
+					remainingMinutes += 0.5;
+					emptyArray.push(1);
 					break;
-				case 'large':
-					wedges += 10;
+				case 'Energizer':
+					remainingMinutes += 1.5;
+					emptyArray.push(1);
 					break;
+				case 'Green Garden':
+					remainingMinutes += 1.5;
+					emptyArray.push(1);
+					break;
+				case 'Tropical Island':
+					remainingMinutes += 3;
+					emptyArray.push(1);
+					break;
+				case 'All or Nothing':
+					remainingMinutes += 5;
+					emptyArray.push(1);
+					break;
+				default:
+					remainingMinutes += 2.5;
+					emptyArray.push(1);
+			}
+			if (remainingMinutes >= timeLeft) {
+				break;
 			}
 		}
 	}
-
-	return wedges;
+	return orders.splice(emptyArray.length);
 }
 
-console.log(limesToCut(25, ['small', 'small', 'large', 'medium', 'small']));
+console.log(
+	remainigOrders(7, [
+		'Tropical Island',
+		'Energizer',
+		'Limetime',
+		'All or Nothing',
+		'Pure Strawberry Joy',
+	]),
+);
