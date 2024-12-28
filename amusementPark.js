@@ -6,7 +6,6 @@
 // The age of the visitor.
 // The identifier of the ticket that the visitor bought.
 // The function should return an object that holds this information. The keys in the object should be called name, age and ticketId.
-
 function createVisitor(name, age, ticketId) {
 	return {
 		name: name,
@@ -63,19 +62,39 @@ function ticketStatus(tickets, ticketId) {
 // the name of the visitor if the ticket was sold
 // 'invalid ticket !!!' if the ticket was not sold yet or the identifier was not found in the tracking object
 const tickets2 = {
-	B7627X32: '',
-	XF1X6S2W: 0,
-	KJJIFFO0: false,
+	'0H2AZ123': null,
+	'23LA9T41': 'Verena Nardi',
 };
 
 function simpleTicketsStatus(tickets, ticketId) {
 	for (let key in tickets) {
-		if (!tickets[ticketId] === true) {
-			return 'invalid ticket !!!';
-		} else {
-			return `${tickets[ticketId]}`;
-		}
+		return tickets[ticketId] ?? 'invalid ticket !!!';
 	}
 }
 
-console.log(simpleTicketsStatus(tickets2, 'B7627X32'));
+// Due to new legal requirements, newly created visitor objects now also contain detailed information on the "General Terms & Conditions" (GTC) that the user agreed to. You can see an example of the new visitor object below.
+
+// The cashiers of the amusement park now need to check whether a visitor needs to sign a new version of the GTC. For this, implement a function gtcVersion that accepts a visitor object as an argument and returns the GTC version if it is available. If the version information is not available, nothing should be returned.
+
+const visitorNew = {
+	name: 'Verena Nardi',
+	age: 45,
+	ticketId: 'H32AZ123',
+	gtc: {
+		signed: true,
+		version: '2.1',
+	},
+};
+
+const visitorOld = {
+	name: 'Verena Nardi',
+	age: 45,
+	ticketId: 'H32AZ123',
+};
+
+function gtcVersion(visitor) {
+	return visitor.gtc?.version;
+}
+
+console.log(gtcVersion(visitorNew));
+console.log(gtcVersion(visitorOld));
